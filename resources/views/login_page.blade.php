@@ -54,7 +54,7 @@
                                                     <div class="form-group">
                                                         <div class="form-check ml-2">
                                                             <input class="form-check-input" type="checkbox"
-                                                                id="basic_checkbox_1">
+                                                                id="basic_checkbox_1" name="remember">
                                                             <label class="form-check-label" for="basic_checkbox_1">Remember
                                                                 me</label>
                                                         </div>

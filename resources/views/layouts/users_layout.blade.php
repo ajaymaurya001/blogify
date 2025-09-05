@@ -58,9 +58,15 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('login') }}" class="btn btn-primary px-4 mr-1">Login</a>
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-primary px-4 mr-1">Login</a>
+                    <a href="{{ route('users.create') }}" class="btn btn-primary px-4">Register</a>
+                @endguest
 
-                <a href="{{ route('users.create') }}" class="btn btn-primary px-4">Register</a>
+                @auth
+                    <a href="{{ route('user_dashboard') }}" class="btn btn-primary px-4">My Dashboard</a>
+                @endauth
+
             </div>
         </nav>
     </div>

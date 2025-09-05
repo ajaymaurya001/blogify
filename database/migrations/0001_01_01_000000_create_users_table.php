@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('gender');
             $table->string('bio');
             $table->boolean('is_admin')->default(0);
+            $table->boolean('is_active')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

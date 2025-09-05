@@ -139,11 +139,7 @@
                                         <span class="ml-2">Inbox </span>
                                     </a>
                                     <i class="icon-key"></i>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button class="ml-2 btn" type="submit">Logout </button>
-
-                                    </form>
+                                   <x-logout_btn />
                                 </div>
                             </li>
                         </ul>
@@ -291,7 +287,7 @@
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Hi, welcome back!</h4>
+                            <h4>Hi {{ Auth::user()->name }}, welcome back!</h4>
                             <p class="mb-0">Your business dashboard template</p>
                         </div>
                     </div>

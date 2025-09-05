@@ -141,10 +141,7 @@
                                         <i class="icon-envelope-open"></i>
                                         <span class="ml-2">Inbox </span>
                                     </a>
-                                    <a href="./page-login.html" class="dropdown-item">
-                                        <i class="icon-key"></i>
-                                        <span class="ml-2">Logout </span>
-                                    </a>
+                                    <x-logout_btn />
                                 </div>
                             </li>
                         </ul>
@@ -289,6 +286,9 @@
             <!-- row -->
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-12">
+                        <h2>Weclome to Admin Panel, {{ Auth::user()->name }}</h2>
+                    </div>
                     <div class="col-lg-3 col-sm-6">
                         <div class="card">
                             <div class="stat-widget-two card-body">
