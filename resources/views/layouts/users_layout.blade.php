@@ -64,7 +64,11 @@
                 @endguest
 
                 @auth
-                    <a href="{{ route('user_dashboard') }}" class="btn btn-primary px-4">My Dashboard</a>
+                    @if (Auth::user()->is_admin)
+                        <a href="{{ route('admin_dashboard') }}" class="btn btn-primary px-4">Admin Dashboard</a>
+                    @else
+                        <a href="{{ route('user_dashboard') }}" class="btn btn-primary px-4">My Dashboard</a>
+                    @endif
                 @endauth
 
             </div>

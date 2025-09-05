@@ -6,8 +6,8 @@
 
 
     <!--*******************
-                Preloader start
-            ********************-->
+                    Preloader start
+                ********************-->
     <div id="preloader">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
@@ -16,18 +16,18 @@
         </div>
     </div>
     <!--*******************
-                Preloader end
-            ********************-->
+                    Preloader end
+                ********************-->
 
 
     <!--**********************************
-                Main wrapper start
-            ***********************************-->
+                    Main wrapper start
+                ***********************************-->
     <div id="main-wrapper">
 
         <!--**********************************
-                    Nav header start
-                ***********************************-->
+                        Nav header start
+                    ***********************************-->
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
                 <img class="logo-abbr" src="{{ asset('admin_assets/images/logo.png') }}" alt="">
@@ -42,12 +42,12 @@
             </div>
         </div>
         <!--**********************************
-                    Nav header end
-                ***********************************-->
+                        Nav header end
+                    ***********************************-->
 
         <!--**********************************
-                    Header start
-                ***********************************-->
+                        Header start
+                    ***********************************-->
         <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
@@ -66,6 +66,14 @@
                         </div>
 
                         <ul class="navbar-nav header-right">
+
+                            <li class="nav-item dropdown header-profile">
+                                <a href="{{ route('home') }}" class="dropdown-item border">
+                                    <i class="fa fa-home"></i>
+                                    <span class="ml-2">Home</span>
+                                </a>
+                            </li>
+
                             <li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-bell"></i>
@@ -150,13 +158,13 @@
             </div>
         </div>
         <!--**********************************
-                    Header end ti-comment-alt
-                ***********************************-->
+                        Header end ti-comment-alt
+                    ***********************************-->
 
 
         <!--**********************************
-                    Sidebar start
-                ***********************************-->
+                        Sidebar start
+                    ***********************************-->
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
@@ -276,12 +284,12 @@
 
         </div>
         <!--**********************************
-                    Sidebar end
-                ***********************************-->
+                        Sidebar end
+                    ***********************************-->
 
         <!--**********************************
-                    Content body start
-                ***********************************-->
+                        Content body start
+                    ***********************************-->
         <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
@@ -899,12 +907,12 @@
             </div>
         </div>
         <!--**********************************
-                    Content body end
-                ***********************************-->
+                        Content body end
+                    ***********************************-->
 
         <!--**********************************
-                    Footer start
-                ***********************************-->
+                        Footer start
+                    ***********************************-->
         <div class="footer">
             <div class="copyright">
                 <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">Quixkit</a> 2019</p>
@@ -912,21 +920,21 @@
             </div>
         </div>
         <!--**********************************
-                    Footer end
-                ***********************************-->
+                        Footer end
+                    ***********************************-->
 
         <!--**********************************
-                   Support ticket button start
-                ***********************************-->
+                       Support ticket button start
+                    ***********************************-->
 
         <!--**********************************
-                   Support ticket button end
-                ***********************************-->
+                       Support ticket button end
+                    ***********************************-->
 
 
     </div>
     <!--**********************************
-                Main wrapper end
-            ***********************************-->
+                    Main wrapper end
+                ***********************************-->
 
 @endsection

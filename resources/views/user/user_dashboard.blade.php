@@ -3,8 +3,8 @@
 
 @section('content')
     <!--*******************
-                        Preloader start
-                    ********************-->
+                            Preloader start
+                        ********************-->
     <div id="preloader">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
@@ -13,24 +13,20 @@
         </div>
     </div>
     <!--*******************
-                        Preloader end
-                    ********************-->
+                            Preloader end
+                        ********************-->
 
 
     <!--**********************************
-                        Main wrapper start
-                    ***********************************-->
+                            Main wrapper start
+                        ***********************************-->
     <div id="main-wrapper">
 
         <!--**********************************
-                            Nav header start
-                        ***********************************-->
+                                Nav header start
+                            ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="./images/logo.png" alt="">
-                <img class="logo-compact" src="./images/logo-text.png" alt="">
-                <img class="brand-title" src="./images/logo-text.png" alt="">
-            </a>
+            <x-site_logo/>
 
             <div class="nav-control">
                 <div class="hamburger">
@@ -39,12 +35,12 @@
             </div>
         </div>
         <!--**********************************
-                            Nav header end
-                        ***********************************-->
+                                Nav header end
+                            ***********************************-->
 
         <!--**********************************
-                            Header start
-                        ***********************************-->
+                                Header start
+                            ***********************************-->
         <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
@@ -63,6 +59,12 @@
                         </div>
 
                         <ul class="navbar-nav header-right">
+                            <li class="nav-item dropdown header-profile">
+                                <a href="{{ route('home') }}" class="dropdown-item border">
+                                    <i class="fa fa-home"></i>
+                                    <span class="ml-2">Home</span>
+                                </a>
+                            </li>
                             <li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-bell"></i>
@@ -139,7 +141,7 @@
                                         <span class="ml-2">Inbox </span>
                                     </a>
                                     <i class="icon-key"></i>
-                                   <x-logout_btn />
+                                    <x-logout_btn />
                                 </div>
                             </li>
                         </ul>
@@ -148,18 +150,18 @@
             </div>
         </div>
         <!--**********************************
-                            Header end ti-comment-alt
-                        ***********************************-->
+                                Header end ti-comment-alt
+                            ***********************************-->
 
         <!--**********************************
-                            Sidebar start
-                        ***********************************-->
+                                Sidebar start
+                            ***********************************-->
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Main Menu</li>
                     <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                                    </li> -->
+                                        </li> -->
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
                         <ul aria-expanded="false">
@@ -276,12 +278,12 @@
 
         </div>
         <!--**********************************
-                            Sidebar end
-                        ***********************************-->
+                                Sidebar end
+                            ***********************************-->
 
         <!--**********************************
-                            Content body start
-                        ***********************************-->
+                                Content body start
+                            ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -327,11 +329,11 @@
                                                     </div>
                                                 </div>
                                                 <!-- <div class="col-xl-4 col-sm-4 prf-col">
-                                                                    <div class="profile-call">
-                                                                        <h4 class="text-muted">(+1) 321-837-1030</h4>
-                                                                        <p>Phone No.</p>
-                                                                    </div>
-                                                                </div> -->
+                                                                        <div class="profile-call">
+                                                                            <h4 class="text-muted">(+1) 321-837-1030</h4>
+                                                                            <p>Phone No.</p>
+                                                                        </div>
+                                                                    </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -686,33 +688,33 @@
             </div>
         </div>
         <!--**********************************
-                            Content body end
-                        ***********************************-->
+                                Content body end
+                            ***********************************-->
 
 
         <!--**********************************
-                            Footer start
-                        ***********************************-->
+                                Footer start
+                            ***********************************-->
         <div class="footer">
             <div class="copyright">
                 <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">Quixkit</a> 2019</p>
             </div>
         </div>
         <!--**********************************
-                            Footer end
-                        ***********************************-->
+                                Footer end
+                            ***********************************-->
 
         <!--**********************************
-                           Support ticket button start
-                        ***********************************-->
+                               Support ticket button start
+                            ***********************************-->
 
         <!--**********************************
-                           Support ticket button end
-                        ***********************************-->
+                               Support ticket button end
+                            ***********************************-->
 
 
     </div>
     <!--**********************************
-                        Main wrapper end
-                    ***********************************-->
+                            Main wrapper end
+                        ***********************************-->
 @endsection

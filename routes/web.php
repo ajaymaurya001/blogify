@@ -19,6 +19,13 @@ Route::view('/blogs', 'blogs')->name('blogs');
 
 Route::get('/forget', [AuthController::class, 'forget_pass'])->name('forget');
 
+/*
+|--------------------------------------------------------------------------
+| Resource controller Routes: User
+|--------------------------------------------------------------------------
+*/
+Route::resource('users', UserController::class);
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,23 +44,17 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 /*
 |--------------------------------------------------------------------------
-| User Routes
+| User and Admin dashboard Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth')->group(function () {
-    Route::get('/user_dashboard', fn() => view('user.user_dashboard'))
+// User-only routes
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/user_dashboard', fn () => view('user.user_dashboard'))
         ->name('user_dashboard');
-
-    Route::resource('users', UserController::class);
 });
 
-
-/*
-|--------------------------------------------------------------------------
-| Admin Routes
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin_dashboard', fn() => view('admin.admin_dashboard'))
+// Admin-only routes
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin_dashboard', fn () => view('admin.admin_dashboard'))
         ->name('admin_dashboard');
 });
