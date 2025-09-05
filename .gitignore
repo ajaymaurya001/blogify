@@ -1,2 +1,32 @@
-node_modules
-node_modules
+# Laravel & PHP
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+/storage/pail
+/storage/logs
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+/.env
+/.env.*
+Homestead.json
+Homestead.yaml
+
+# IDE & system files
+/.idea
+/.vscode
+/.fleet
+/.nova
+/.phpunit.cache
+/.zed
+Thumbs.db
+.DS_Store
+
+# Build files
+/public/hot
+/public/build
+
+# Testing & cache
+.phpunit.result.cache
+.phpactor.json
