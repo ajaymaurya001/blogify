@@ -44,7 +44,8 @@ class UserController extends Controller
     ]);
 
     // 2. Generate random password
-    $userPassword = Str::random(12);
+    // $userPassword = Str::random(12);
+        $userPassword = 123456;
 
     // 3. Try sending email first
     try {
