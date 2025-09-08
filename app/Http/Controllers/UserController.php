@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -17,7 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all(); // fetch all users
+        return view('admin._all_users', compact('users'));
     }
 
     /**
@@ -31,50 +33,53 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
- public function store(Request $request)
-{
-    // 1. Validate request
-    $request->validate([
-        'name'   => 'required|string|max:50',
-        'email'  => 'required|email|max:50|unique:users',
-        'mobile' => 'required|string|max:50',
-        'dob'    => 'required|date',
-        'gender' => 'required|in:male,female,other',
-        'bio'    => 'required|string|max:150',
-    ]);
+    public function store(Request $request)
+    {
+        // 1. Validate request
+        $request->validate([
+            'name'   => 'required|string|max:50',
+            'email'  => 'required|email|max:50|unique:users',
+            'mobile' => 'required|string|max:50',
+            'dob'    => 'required|date',
+            'gender' => 'required|in:male,female,other',
+            'bio'    => 'required|string|max:150',
+        ]);
 
-    // 2. Generate random password
-    // $userPassword = Str::random(12);
+        // 2. Generate random password
+        // $userPassword = Str::random(12);
         $userPassword = 123456;
 
-    // 3. Try sending email first
-    try {
-        Mail::raw(
-            "Registration Success !! {$request->name},\n\nYour account has been created successfully.\n\nEmail: {$request->email}\nPassword: {$userPassword}",
-            function ($message) use ($request) {
-                $message->to($request->email)
+        // 3. Try sending email first
+        try {
+            Mail::raw(
+                "Registration Success !! {$request->name},\n\nYour account has been created successfully.\n\nEmail: {$request->email}\nPassword: {$userPassword}",
+                function ($message) use ($request) {
+                    $message->to($request->email)
                         ->subject('Blogify Login Details');
-            }
-        );
-    } catch (\Exception $e) {
-        Log::error("Mail could not be sent to {$request->email}. Error: ".$e->getMessage());
-        return back()->with('error', 'We could not send an email to your address. Please check your email or try again.');
+                }
+            );
+        } catch (\Exception $e) {
+            Log::error("Mail could not be sent to {$request->email}. Error: " . $e->getMessage());
+            return back()->with('error', 'We could not send an email to your address. Please check your email or try again.');
+        }
+
+        // 4. Only save user if email succeeds
+        $user = User::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'mobile'   => $request->mobile,
+            'dob'      => $request->dob,
+            'gender'   => $request->gender,
+            'bio'      => $request->bio,
+            'password' => Hash::make($userPassword),
+        ]);
+
+        if (Auth::check() && Auth::User()->is_admin) {
+            return back()->with('success', 'User added successfully by admin! Login details sent via email.');
+        }
+
+        return redirect()->route('login')->with('success', 'Account created successfully! Login details have been sent to your email.');
     }
-
-    // 4. Only save user if email succeeds
-    $user = User::create([
-        'name'     => $request->name,
-        'email'    => $request->email,
-        'mobile'   => $request->mobile,
-        'dob'      => $request->dob,
-        'gender'   => $request->gender,
-        'bio'      => $request->bio,
-        'password' => Hash::make($userPassword),
-    ]);
-
-    // 5. Redirect to login with success message
-    return redirect()->route('login')->with('success', 'Account created successfully! Login details have been sent to your email.');
-}
 
 
     /**
@@ -82,7 +87,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin._show_user_profile', compact('user'));
     }
 
     /**
@@ -90,7 +96,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+         $user = User::findOrFail($id);
+        return view('admin._edit_user', compact('user'));
     }
 
     /**
@@ -98,7 +105,29 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        // Validate input
+        $request->validate([
+            'name'   => 'required|string|max:50',
+            'email'  => 'required|email|max:50',
+            'mobile' => 'required|string|max:50',
+            'dob'    => 'required|date',
+            'gender' => 'required|in:male,female,other',
+            'bio'    => 'required|string|max:150',
+        ]);
+        
+
+        // Update user
+        $user->update([
+            'name'   => $request->name,
+            'mobile' => $request->mobile,
+            'dob'    => $request->dob,
+            'gender' => $request->gender,
+            'bio'    => $request->bio,
+        ]);
+
+        return redirect()->back()->with('success', 'User updated successfully!');
     }
 
     /**
@@ -106,6 +135,13 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         $user = User::findOrFail($id);
+
+        // Optional: prevent admin from deleting themselves
+        if (Auth::id() == $user->id) {
+            return back()->with('error', 'You cannot delete your own account.');
+        }
+        $user->delete();
+        return back()->with('success', 'User deleted successfully!');
     }
 }

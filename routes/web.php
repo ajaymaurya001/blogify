@@ -17,7 +17,8 @@ Route::view('/about', 'about')->name('about');
 Route::view('/contact', 'contact')->name('contact');
 Route::view('/blogs', 'blogs')->name('blogs');
 
-Route::get('/forget', [AuthController::class, 'forget_pass'])->name('forget');
+Route::post('/forget', [AuthController::class, 'forget_pass'])->name('forget');
+Route::view('/forget_pass', 'forget_pass_page')->name('forget_pass_form');
 
 /*
 |--------------------------------------------------------------------------
@@ -49,12 +50,19 @@ Route::post('/logout', [AuthController::class, 'logout'])
 */
 // User-only routes
 Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/user_dashboard', fn () => view('user.user_dashboard'))
+    Route::get('/user_dashboard', fn() => view('user.user_dashboard'))
         ->name('user_dashboard');
 });
 
 // Admin-only routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin_dashboard', fn () => view('admin.admin_dashboard'))
+    Route::get('/admin_dashboard', fn() => view('admin.admin_dashboard'))
         ->name('admin_dashboard');
+    Route::get('/admin_dashboard/add_user', fn() => view('admin._add_user_form'))->name('admin.add_user');
+
+    Route::get('/admin_dashboard/all_user', [UserController::class, 'index'])
+        ->name('admin.all_user');
+
+    Route::get('/admin_dashboard/all_user', [UserController::class, 'index'])
+        ->name('admin.all_user');
 });

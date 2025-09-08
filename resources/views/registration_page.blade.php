@@ -20,17 +20,7 @@
                                 <div class="auth-form">
 
                                     <h4 class="text-center mb-4">Share, Inspire & Grow – Join as a Blogger</h4>
-                                    @if (session('success'))
-                                        <div class="alert alert-success">
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-
-                                    @if (session('error'))
-                                        <div class="alert alert-danger">
-                                            {{ session('error') }}
-                                        </div>
-                                    @endif
+                                              @include('components.alert_msg')
                                     <form action="{{ route('users.store') }}" method="POST">
                                         @csrf
                                         <!-- Name -->

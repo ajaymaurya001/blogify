@@ -21,23 +21,14 @@
                                     <a href="{{ route('home') }}" class="return_btn">
                                         < Return home</a>
                                             <h4 class="text-center mb-4">Sign In to Your Blog</h4>
-                                            @if (session('success'))
-                                                <div class="alert alert-success bg-light">
-                                                    {{ session('success') }}
-                                                </div>
-                                            @endif
-
-                                            @if (session('error'))
-                                                <div class="alert alert-danger bg-light">
-                                                    {{ session('error') }}
-                                                </div>
-                                            @endif
+                                            @include('components.alert_msg')
                                             <form action="{{ route('login.store') }}" method="post">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label><strong>Registered Email</strong></label>
                                                     <input type="email" class="form-control" name="email"
-                                                        value="{{ old('email') }}" placeholder="Enter your registered email">
+                                                        value="{{ old('email') }}"
+                                                        placeholder="Enter your registered email">
                                                     @error('email')
                                                         <small class="text-danger">{{ $message }}</small>
                                                     @enderror
@@ -60,11 +51,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <a href="{{ route('forget') }}">Forgot Password?</a>
+                                                        <a href="{{ route('forget_pass_form') }}">Forgot Password?</a>
                                                     </div>
                                                 </div>
                                                 <div class="text-center">
-                                                    <button type="submit" class="btn btn-primary btn-block col-lg-6 mx-auto">Sign me
+                                                    <button type="submit"
+                                                        class="btn btn-primary btn-block col-lg-6 mx-auto">Sign me
                                                         in</button>
                                                 </div>
                                             </form>

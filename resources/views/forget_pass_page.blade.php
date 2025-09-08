@@ -20,13 +20,17 @@
                                 <div class="auth-form">
 
                                     <h4 class="text-center mb-4">Generate New Password</h4>
-                                    <form action="index.html">
+                                    @include('components.alert_msg')
+                                    <form action="{{ route('forget') }}" method="post">
+                                        @csrf
                                         <div class="form-group">
                                             <label><strong>Enter Your Registered Email</strong></label>
                                             <input type="email" class="form-control" name="email"
                                                 placeholder="email@gmail.com">
-                                                <small>Your new password will send to your registered email, you have to use same
-                                                        password while login and after login you can create your own password</small>
+                                            <small>Your new password will send to your registered email, you have to use
+                                                same
+                                                password while login and after login you can create your own
+                                                password</small>
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Send Password</button>
