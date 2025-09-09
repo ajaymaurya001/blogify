@@ -209,10 +209,10 @@
                             </li>
 
                             <li><a class="has-arrow" href="#" aria-expanded="false"><i
-                                        class="fa fa-book"></i><span class="nav-text">Catagory</span></a>
+                                        class="fa fa-book"></i><span class="nav-text">Category</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="./app-profile.html">All Catagory</a></li>
-                                    <li><a href="./app-calender.html">Add New Catagory</a></li>
+                                    <li><a href="{{ route('catagory.index') }}">All Category</a></li>
+                                    <li><a href="{{ route('catagory.create') }}">Add New Category</a></li>
                                 </ul>
                             </li>
 

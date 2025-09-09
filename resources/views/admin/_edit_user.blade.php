@@ -9,7 +9,7 @@
 
             <h4 class="text-center mb-4">Edit User</h4>
             @include('components.alert_msg')
-            <form action="{{ route('users.update',$user->id) }}" method="POST">
+            <form action="{{ route('users.update',$user->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <!-- Name -->
