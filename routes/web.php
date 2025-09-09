@@ -19,7 +19,7 @@ Route::view('/blogs', 'blogs')->name('blogs');
 
 Route::post('/forget', [AuthController::class, 'forget_pass'])->name('forget');
 Route::view('/forget_pass', 'forget_pass_page')->name('forget_pass_form');
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Resource controller Routes: User

@@ -208,6 +208,14 @@
                                 </ul>
                             </li>
 
+                            <li><a class="has-arrow" href="#" aria-expanded="false"><i
+                                        class="fa fa-book"></i><span class="nav-text">Catagory</span></a>
+                                <ul aria-expanded="false">
+                                    <li><a href="./app-profile.html">All Catagory</a></li>
+                                    <li><a href="./app-calender.html">Add New Catagory</a></li>
+                                </ul>
+                            </li>
+
                             <li><a class="" href="#" aria-expanded="false"><i
                                         class="fa fa-user-circle"></i><span class="nav-text">My Profile</span></a>
                             </li>

@@ -10,7 +10,7 @@
                 <div class="photo-content">
                     <div class="cover-photo"></div>
                     <div class="profile-photo">
-                        <img src="{{ config('constant.default_user_image') }}" class="img-fluid rounded-circle" alt="">
+                        <img src="{{ $defaultImage }}" class="img-fluid rounded-circle" alt="">
                     </div>
                 </div>
                 <div class="profile-info">
