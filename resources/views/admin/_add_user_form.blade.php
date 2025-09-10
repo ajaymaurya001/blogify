@@ -81,6 +81,23 @@
                     @enderror
                 </div>
 
+
+                <div class="form-group">
+                    <label><strong>User Type</strong></label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="is_admin" id="admin" value="1">
+                        <label class="form-check-label" for="admin">Admin</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="is_admin" id="user" value="0"
+                            checked>
+                        <label class="form-check-label" for="user">User</label>
+                    </div>
+                    @error('is_admin')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
                 <!-- Submit -->
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary btn-block mx-auto col-lg-6">Turn Your Ideas

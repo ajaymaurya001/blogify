@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CatagoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -25,7 +26,7 @@ Route::view('/forget_pass', 'forget_pass_page')->name('forget_pass_form');
 // all Resource controller Routes
 
 Route::resource('users', UserController::class);
-Route::resource('catagory', CatagoryController::class);
+// Route::resource('catagory', CatagoryController::class);
 
 
 /*
@@ -65,4 +66,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin_dashboard/all_user', [UserController::class, 'index'])
         ->name('admin.all_user');
+
+    // catagory route 
+    Route::resource('catagory', CatagoryController::class);
+    Route::resource('blog', BlogController::class);
 });

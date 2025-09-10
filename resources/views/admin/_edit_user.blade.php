@@ -9,7 +9,7 @@
 
             <h4 class="text-center mb-4">Edit User</h4>
             @include('components.alert_msg')
-            <form action="{{ route('users.update',$user->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <!-- Name -->
@@ -46,7 +46,8 @@
                 <!-- Date of Birth -->
                 <div class="form-group">
                     <label><strong>Date of Birth</strong></label>
-                    <input type="date" class="form-control" name="dob" value="{{ $user->dob }}">
+                    <input type="date" class="form-control" name="dob"
+                        value="{{ $user->dob ? $user->dob->format('Y-m-d') : '' }}">
                     @error('dob')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
@@ -56,15 +57,18 @@
                 <div class="form-group">
                     <label><strong>Gender</strong></label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="male" value="male" {{ $user->gender == 'male' ? 'checked' : '' }}>
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="male"
+                            {{ $user->gender == 'male' ? 'checked' : '' }}>
                         <label class="form-check-label" for="male">Male</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ $user->gender == 'female' ? 'checked' : '' }}>
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="female"
+                            {{ $user->gender == 'female' ? 'checked' : '' }}>
                         <label class="form-check-label" for="female">Female</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="other" value="other" {{ $user->gender == 'other' ? 'checked' : '' }}>
+                        <input class="form-check-input" type="radio" name="gender" id="other" value="other"
+                            {{ $user->gender == 'other' ? 'checked' : '' }}>
                         <label class="form-check-label" for="other">Other</label>
                     </div>
                     @error('gender')
@@ -81,10 +85,32 @@
                     @enderror
                 </div>
 
+                @if (Auth::check() && Auth::user()->is_admin && Auth::id() !== $user->id)
+                    <div class="form-group">
+                        <label><strong>User Type</strong></label><br>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="is_admin" id="admin" value="1"
+                                {{ old('is_admin', $user->is_admin) == 1 ? 'checked' : '' }}>
+                            <label class="form-check-label" for="admin">Admin</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="is_admin" id="user" value="0"
+                                {{ old('is_admin', $user->is_admin) == 0 ? 'checked' : '' }}>
+                            <label class="form-check-label" for="user">User</label>
+                        </div>
+
+                        @error('is_admin')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                @endif
+
+
                 <!-- Submit -->
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-primary btn-block mx-auto col-lg-6">Turn Your Ideas
-                        Into Blogs – Register Now</button>
+                    <button type="submit" class="btn btn-primary btn-block mx-auto col-lg-6">Update </button>
                 </div>
             </form>
 

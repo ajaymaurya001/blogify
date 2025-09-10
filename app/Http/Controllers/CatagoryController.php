@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Catagory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class CatagoryController extends Controller
 {
@@ -85,46 +86,44 @@ class CatagoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Find category
-        $category = Catagory::findOrFail($id);
-
-        // Validate request (ignore current category for unique rules)
         $request->validate([
-            'title'       => 'required|string|max:50|unique:catagories,title,' . $category->id,
-            'slug'        => 'required|unique:catagories,slug,' . $category->id,
+            'title'       => 'required|string|max:50|unique:catagories,title,' . $id,
+            'slug'        => 'required|unique:catagories,slug,' . $id,
             'description' => 'required|string|max:255',
             'image'       => 'nullable|file|mimes:jpg,jpeg,png,gif|max:2048',
             'status'      => 'required|in:1,0',
         ]);
 
-        $newName = $category->image; // keep old image by default
+        // 2. Find category
+        $category = Catagory::findOrFail($id);
 
+        // 3. Handle image update
         if ($request->hasFile('image')) {
+            // Delete old image if exists and not default
+            if ($category->image && File::exists(public_path('uploads/categories/' . $category->image))) {
+                File::delete(public_path('uploads/categories/' . $category->image));
+            }
+
+            // Save new image
             $file = $request->file('image');
             $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $extension = $file->getClientOriginalExtension();
             $newName = now()->format('Ymd_His') . '.' . $originalName . '.' . $extension;
-
-            // store in public/uploads/categories
             $file->move(public_path('uploads/categories'), $newName);
 
-            // Optionally delete old image
-            if ($category->image && file_exists(public_path('uploads/categories/' . $category->image))) {
-                unlink(public_path('uploads/categories/' . $category->image));
-            }
+            $category->image = $newName;
         }
 
-        
-        // Update category
-        $category->update([
-            'title'       => $request->title,
-            'slug'        => $request->slug,
-            'description' => $request->description,
-            'image'       => $newName,
-            'status'      => $request->status,
-        ]);
+        // 4. Update other fields
+        $category->title       = $request->title;
+        $category->slug        = $request->slug;
+        $category->description = $request->description;
+        $category->status      = $request->status;
 
-        return back()->with('success', 'Category updated successfully');
+        // 5. Save changes
+        $category->save();
+
+        return redirect()->route('catagory.index')->with('success', 'Category updated successfully');
     }
 
 

@@ -33,49 +33,45 @@
 
 
                         @foreach ($users as $user)
-                            @if ($user->id !== auth()->id())
-                                <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->mobile }}</td>
-                                    <td>{{ $user->dob->format('d F Y') }}</td>
-                                    <td>{{ $user->gender }}</td>
-                                    <td>{{ $user->bio }}</td>
-                                    <td>
-                                        @if ($user->is_admin)
-                                            <span class="text-success">ADMIN</span>
-                                        @else
-                                            <span>USER</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($user->is_active)
-                                            <span class="text-warning">Active</span>
-                                        @else
-                                            <span class="text-danger">Inactive</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{{ route('users.show', $user->id) }}"
-                                            class="btn btn-primary btn-sm">View</a>
-                                        <a href="{{ route('users.edit', $user->id) }}"
-                                            class="btn btn-warning btn-sm mx-2">Edit</a>
+                            <tr @if ($user->id == auth()->id()) style="background-color:#e6f9eb !important;" @endif>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->mobile }}</td>
+                                <td>{{ $user->dob->format('d F Y') }}</td>
+                                <td>{{ $user->gender }}</td>
+                                <td>{{ $user->bio }}</td>
+                                <td>
+                                    @if ($user->is_admin)
+                                        <span class="text-success">ADMIN</span>
+                                    @else
+                                        <span>USER</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($user->is_active)
+                                        <span class="text-primary">Active</span>
+                                    @else
+                                        <span class="text-danger">Inactive</span>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary btn-sm">View</a>
+                                    <a href="{{ route('users.edit', $user->id) }}"
+                                        class="btn btn-warning btn-sm mx-2">Edit</a>
 
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure you want to delete this user?')">
-                                                Delete
-                                            </button>
-                                        </form>
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure you want to delete this user?')">
+                                            Delete
+                                        </button>
+                                    </form>
 
-                                    </td>
+                                </td>
 
-                                </tr>
-                            @endif
+                            </tr>
                         @endforeach
 
                     </tbody>

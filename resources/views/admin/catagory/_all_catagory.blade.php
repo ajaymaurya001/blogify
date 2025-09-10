@@ -36,7 +36,19 @@
                                     <td>{{ $cat->title }}</td>
                                     <td>{{ $cat->slug }}</td>
                                     <td>{{ $cat->description }}</td>
-                                    <td>{{ $cat->image== null ? 'Not Available': $cat->image}}</td>
+
+
+                                    @php
+                                        $imagePath = public_path('uploads/categories/' . $cat->image);
+                                        if (!empty($cat->image) && file_exists($imagePath)) {
+                                            $img_url = asset('uploads/categories/' . $cat->image);
+                                        } else {
+                                            $img_url = asset('uploads/categories/default.png');
+                                        }
+                                    @endphp
+                                    <td> <img src="{{ $img_url }}" alt="cat-img" width="50px" height="50px"></td>
+
+
                                     <td>{{ $cat->status }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('catagory.edit', $cat->id) }}"

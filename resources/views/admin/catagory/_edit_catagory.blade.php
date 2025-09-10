@@ -55,13 +55,13 @@
                 <div class="form-group">
 
                     @php
-                        if ($catagory->status == null) {
+                        $imagePath = public_path('uploads/categories/' . $catagory->image);
+                        if (!empty($catagory->image) && file_exists($imagePath)) {
                             $img_url = asset('uploads/categories/' . $catagory->image);
                         } else {
                             $img_url = asset('uploads/categories/default.png');
                         }
                     @endphp
-
 
                     <img src="{{ $img_url }}" alt="cat-img" width="200px" height="200px">
                 </div>

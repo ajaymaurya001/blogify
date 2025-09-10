@@ -33,6 +33,19 @@
             background: #fff;
             padding: 4px;
         }
+
+        div.img-box {
+            width: 500px;
+            height: 250px;
+            background-image: url({{ $defaultImage }});
+            background-size: cover;
+            background-position: center;
+        }
+
+        .all-blogs .col-xl-4 {
+            flex: 0 0 33.33333%;
+            max-width: 25%;
+        }
     </style>
 
 </head>
@@ -186,7 +199,7 @@
                 <div class="quixnav">
                     <div class="quixnav-scroll">
                         <ul class="metismenu" id="menu">
-                            <li class="nav-label first">Main Menu</li>
+                            <li class="nav-label first text-light">Main Menu</li>
 
                             <li class=""><a href="{{ route('admin_dashboard') }}" aria-expanded="false"><i
                                         class="icon icon-world-2"></i><span class="nav-text">Dashboard</span></a>
@@ -203,8 +216,8 @@
                             <li><a class="has-arrow" href="#" aria-expanded="false"><i
                                         class="fa fa-book"></i><span class="nav-text">Blogs</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="./app-profile.html">All Blog</a></li>
-                                    <li><a href="./app-calender.html">Add Blog</a></li>
+                                    <li><a href="{{ route('blog.index') }}">All Blog</a></li>
+                                    <li><a href="{{ route('blog.create') }}">Add Blog</a></li>
                                 </ul>
                             </li>
 
