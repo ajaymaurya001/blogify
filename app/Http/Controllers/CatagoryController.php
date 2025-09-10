@@ -114,6 +114,7 @@ class CatagoryController extends Controller
             }
         }
 
+        
         // Update category
         $category->update([
             'title'       => $request->title,
