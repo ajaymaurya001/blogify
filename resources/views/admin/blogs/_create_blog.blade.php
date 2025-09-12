@@ -8,7 +8,7 @@
         <div class="auth-form">
             <h4 class="text-center mb-4">Add New Blog</h4>
             @include('components.alert_msg')
-            <form action="{{ route('catagory.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <!-- Name -->
                 <div class="form-group">
@@ -32,11 +32,10 @@
                         password while login !!</small>
                 </div>
 
-                <!-- Mobile Number -->
+                <!-- discription -->
                 <div class="form-group">
                     <label><strong>Blog Description</strong></label>
-                    <input type="text" class="form-control" name="description" placeholder="Enter blog Description"
-                        value="{{ old('description') }}">
+                    <textarea class="form-control" name="description" id="description" rows="20" placeholder="Enter blog description">{{ old('description') }}</textarea>
                     @error('description')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
@@ -44,69 +43,25 @@
 
 
 
-
                 <div class="form-group">
-                    <label><strong>Select Blog Categories</strong></label>
+                    <label><strong>Select Blog Category</strong></label>
+                    <select name="catagory_id" class="form-control">
+                        {{-- Default Option --}}
+                        <option value="">-- Select Category --</option>
 
-                    <div class="input-group mb-3 col-4 col-3">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" name="categories[]" value="Uncategoriesd"
-                                    {{ in_array('Uncategoriesd', old('categories', [])) ? 'checked' : '' }}>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" value="Uncategoriesd" readonly>
-                    </div>
+                        {{-- Loop categories --}}
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ old('catagory_id', 1) == $category->id ? 'selected' : '' }}>
+                                {{ $category->title }}
+                            </option>
+                        @endforeach
+                    </select>
 
-                    <div class="input-group mb-3 col-4 col-3">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" name="categories[]" value="Technology"
-                                    {{ in_array('Technology', old('categories', [])) ? 'checked' : '' }}>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" value="Technology" readonly>
-                    </div>
-
-                    <div class="input-group mb-3 col-4 col-3">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" name="categories[]" value="Health"
-                                    {{ in_array('Health', old('categories', [])) ? 'checked' : '' }}>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" value="Health" readonly>
-                    </div>
-
-                    <div class="input-group mb-3 col-4 col-3">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" name="categories[]" value="Travel"
-                                    {{ in_array('Travel', old('categories', [])) ? 'checked' : '' }}>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" value="Travel" readonly>
-                    </div>
-
-                    <div class="input-group mb-3 col-4 col-3">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" name="categories[]" value="Education"
-                                    {{ in_array('Education', old('categories', [])) ? 'checked' : '' }}>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" value="Education" readonly>
-                    </div>
-
-                    @error('categories')
+                    @error('catagory_id')
                         <small class="text-danger d-block">{{ $message }}</small>
                     @enderror
                 </div>
-
-
-
-
-
 
 
                 {{-- cat image  --}}
@@ -158,12 +113,10 @@
                     @enderror
                 </div>
 
-
                 <div class="form-group">
                     <label><strong>Blog Status</strong></label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="status" id="active" value="1"
-                            checked>
+                        <input class="form-check-input" type="radio" name="status" id="active" value="1" checked>
                         <label class="form-check-label" for="active">Active</label>
                     </div>
                     <div class="form-check form-check-inline">

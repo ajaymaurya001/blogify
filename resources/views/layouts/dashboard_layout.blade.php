@@ -308,6 +308,16 @@
     <script src="{{ asset('admin_assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/plugins-init/datatables.init.js') }}"></script>
 
+   <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#description'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+    
+
 </body>
 
 </html>

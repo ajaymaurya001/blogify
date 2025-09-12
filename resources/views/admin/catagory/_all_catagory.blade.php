@@ -49,7 +49,15 @@
                                     <td> <img src="{{ $img_url }}" alt="cat-img" width="50px" height="50px"></td>
 
 
-                                    <td>{{ $cat->status }}</td>
+                                    <td>
+                                        @if ($cat->status == 1)
+                                            <span class="text-primary">Active</span>
+                                        @else
+                                            <span class="text-danger">Inactive</span>
+                                        @endif
+                                    </td>
+
+
                                     <td class="text-center">
                                         <a href="{{ route('catagory.edit', $cat->id) }}"
                                             class="btn btn-warning btn-sm mx-2">Edit</a>
