@@ -130,13 +130,9 @@ class CatagoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $cat_id)
+    public function destroy(Catagory $cat_id)
     {
-        $catagory = Catagory::findOrFail($cat_id);
-        if (Auth::id() == $catagory->$cat_id) {
-            return back()->with('error', 'You cannot delete your own account.');
-        }
-        $catagory->delete();
+        $cat_id->delete();
         return back()->with('success', 'User deleted successfully!');
     }
 }

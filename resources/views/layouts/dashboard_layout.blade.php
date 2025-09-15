@@ -46,6 +46,18 @@
             flex: 0 0 33.33333%;
             max-width: 25%;
         }
+
+        p.card-text.d-inline {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            padding: 3px 6px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-around;
+        }
     </style>
 
 </head>
@@ -206,14 +218,6 @@
                             </li>
 
                             <li><a class="has-arrow" href="#" aria-expanded="false"><i
-                                        class="fa fa-user"></i><span class="nav-text">Users</span></a>
-                                <ul aria-expanded="false">
-                                    <li><a href="{{ route('admin.all_user') }}">All User</a></li>
-                                    <li><a href="{{ route('admin.add_user') }}">Add User</a></li>
-                                </ul>
-                            </li>
-
-                            <li><a class="has-arrow" href="#" aria-expanded="false"><i
                                         class="fa fa-book"></i><span class="nav-text">Blogs</span></a>
                                 <ul aria-expanded="false">
                                     <li><a href="{{ route('blog.index') }}">All Blog</a></li>
@@ -226,6 +230,14 @@
                                 <ul aria-expanded="false">
                                     <li><a href="{{ route('catagory.index') }}">All Category</a></li>
                                     <li><a href="{{ route('catagory.create') }}">Add New Category</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a class="has-arrow" href="#" aria-expanded="false"><i
+                                        class="fa fa-user"></i><span class="nav-text">Users</span></a>
+                                <ul aria-expanded="false">
+                                    <li><a href="{{ route('admin.all_user') }}">All User</a></li>
+                                    <li><a href="{{ route('admin.add_user') }}">Add User</a></li>
                                 </ul>
                             </li>
 
@@ -308,15 +320,15 @@
     <script src="{{ asset('admin_assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/plugins-init/datatables.init.js') }}"></script>
 
-   <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-        .create(document.querySelector('#description'))
-        .catch(error => {
-            console.error(error);
-        });
-</script>
-    
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
 
 </body>
 
